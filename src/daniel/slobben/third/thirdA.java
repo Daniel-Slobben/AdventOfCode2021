@@ -1,4 +1,4 @@
-package com.company.third;
+package daniel.slobben.third;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,36 +10,35 @@ public class thirdA {
     public static void main(String[] args) {
         // write your code here
         boolean [] mostCommonBit;
+
+        // Dit kan vast mooier, maar kost tijd om te googlen ;)
         int[] bitCounter = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        int counter = 0;
 
         try {
             File myObj = new File("thirdInput.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
-                // Read the next line
+                // Lees de volgende regel
                 String data = myReader.nextLine();
                 String[] split = data.split("(?!^)");
 
-                int counter2 = 0;
+                // Hele mooie teller
+                int teller = 0;
                 for (String bit: split) {
                     if (Objects.equals(bit, "0")) {
-                        bitCounter[counter2]--;
+                        bitCounter[teller]--;
                     }
                     if (Objects.equals(bit, "1")) {
-                        bitCounter[counter2]++;
+                        bitCounter[teller]++;
                     }
-                    counter2++;
+                    teller++;
                 }
-
-                counter++;
             }
             myReader.close();
 
+            // Knal er maar wat in
             StringBuilder gamma = new StringBuilder();
             StringBuilder epsilon = new StringBuilder();
-
-
             for (int b: bitCounter) {
                 if (b > 0) {
                     gamma.append("1");
@@ -50,16 +49,15 @@ public class thirdA {
                 }
             }
 
+            // Alle string builder mogen hun builder uitdoen.
             String gammaString = gamma.toString();
             String epsilonString = epsilon.toString();
 
+            // Alle strings mogen kleur bekennen van binary naar decimal
             int gammaInt = Integer.parseInt(gammaString,2);
             int epsilonInt = Integer.parseInt(epsilonString, 2);
 
             System.out.println("result: " + (gammaInt * epsilonInt));
-
-
-
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
